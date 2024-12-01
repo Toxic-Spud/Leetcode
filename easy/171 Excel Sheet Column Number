@@ -1,0 +1,9 @@
+def titleToNumber(self, columnTitle: str) -> int:
+      tot = 0
+      l = len(columnTitle)
+      while l > 1:
+          tot += (ord(columnTitle[0])-64) * (26**(l-1))
+          columnTitle = columnTitle[1:]
+          l -= 1
+      tot += (ord(columnTitle[0])-64)
+      return(tot)
