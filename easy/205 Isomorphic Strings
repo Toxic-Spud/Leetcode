@@ -1,0 +1,10 @@
+  def isIsomorphic(self, s: str, t: str) -> bool:
+      transform = {}
+      taken = {}
+      for i, let in enumerate(s):
+          transform.setdefault(let, t[i])
+          taken.setdefault(t[i], let)
+          if transform[let] != t[i] or taken[t[i]] != let:
+              return(False)
+      return(True)
+      
