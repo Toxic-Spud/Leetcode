@@ -1,0 +1,10 @@
+def majorityElement(self, nums: List[int]) -> List[int]:
+      res = []
+      thresh = (len(nums) // 3) + 1
+      appeared = {}
+      for num in nums:
+          appeared.setdefault(num, 0)
+          appeared[num] += 1
+          if appeared[num] == thresh:
+              res.append(num)
+      return(res)
