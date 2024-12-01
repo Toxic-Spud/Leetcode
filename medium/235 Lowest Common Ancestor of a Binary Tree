@@ -1,0 +1,11 @@
+def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+      cur = root
+      p = p.val
+      q = q.val
+      while True:
+          if p > cur.val and q > cur.val:
+              cur = cur.right
+          elif p < cur.val and q < cur.val:
+              cur = cur.left
+          else:
+              return(cur)
