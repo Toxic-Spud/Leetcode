@@ -1,0 +1,8 @@
+def missingNumber(self, nums: List[int]) -> int:
+      #O(1) space complexity
+      tot = 0
+      n = len(nums)
+      for num in nums:
+          tot += num
+      return(int(((n*(n+1))/2)-tot))
+        
