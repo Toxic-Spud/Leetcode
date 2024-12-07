@@ -1,0 +1,14 @@
+def longestCommonPrefix(self, strs: List[str]) -> str:
+      longest = strs[0]
+      l = len(longest)
+      for word in strs:
+          if word[:l] != longest:
+              for i in range(l+1):
+                  print(f"{longest[:(l-i)]}:{word[:(l-i)]}")
+                  if word[:(l-i)] == longest[:(l-i)]:
+                      longest = longest[:(l-i)]
+                      lon = longest
+                      break
+          if longest == "":
+              return(longest)
+      return(longest)
