@@ -1,0 +1,20 @@
+def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+      ret = head
+      if head != None:
+          slow = head
+          if slow.next != None:
+              fast = slow.next
+          else:
+              return(head)
+      else:
+          return(head)
+      while fast != None:
+          fast.val = fast.val ^ slow.val
+          slow.val = fast.val ^ slow.val
+          fast.val = fast.val ^ slow.val
+          if fast.next != None:
+              slow = fast.next
+          else:
+              break
+          fast = slow.next
+      return(ret)
