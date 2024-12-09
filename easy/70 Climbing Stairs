@@ -1,0 +1,5 @@
+def climbStairs(self, n: int) -> int:
+      fibo = [1,1]
+      for i in range(1,n):
+          fibo.append(fibo[i]+fibo[i-1])
+      return(fibo[-1:][0])
