@@ -1,0 +1,6 @@
+def isPalindrome(self, s: str) -> bool:
+      back = ""
+      for let in s:
+          if let.isalnum():
+              back += let.lower()
+      return(back[::-1]==back)
