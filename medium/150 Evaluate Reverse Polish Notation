@@ -1,3 +1,32 @@
+#revised version runs in linear time instead of O(n^2) i must've let my brain fall out whilst coding the first solution
+def evalRPN(self, tokens: List[str]) -> int:
+  stack = []
+  for let in tokens:
+      if let.isnumeric() or (let[0] == "-" and len(let) > 1):
+          stack.append(int(let))
+      else:
+          num1 = stack.pop()
+          num2 = stack.pop()
+          if let == "+":
+              stack.append(int(num1+num2))
+          elif let == "-":
+              stack.append(int(num2-num1))
+          elif let == "*":
+              stack.append(int(num2*num1))
+          elif let == "/":
+              stack.append(int(num2/num1))
+  return(stack.pop())
+
+
+
+
+
+
+
+
+
+#innefficient old solution
+
 def evalRPN(self, tokens: List[str]) -> int:
       i = 0
       while i < len(tokens):
@@ -34,3 +63,11 @@ def evalRPN(self, tokens: List[str]) -> int:
       for num in tokens:
           if num.isnumeric() or (num[0] == "-" and len(num) > 1):
               return(int(num))
+
+
+
+
+
+
+
+
