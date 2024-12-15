@@ -1,0 +1,36 @@
+def evalRPN(self, tokens: List[str]) -> int:
+      i = 0
+      while i < len(tokens):
+          let = tokens[i]
+          if let in "/+-*":
+              num1 = None
+              num2 = None
+              index1 = None
+              index2 = None
+              for y in range(i):
+                  if tokens[y].isnumeric() or (tokens[y][0] == "-" and len(tokens[y]) > 1):
+                      num2 = num1
+                      num1 = int(tokens[y])
+                      index2 = index1
+                      index1 = y
+              if let == "+":
+                  tokens.pop(index1)
+                  tokens.pop(index2)
+                  tokens.insert(index2, str(int(num1+num2)))
+              elif let == "-":
+                  tokens.pop(index1)
+                  tokens.pop(index2)
+                  tokens.insert(index2, str(num2-num1))
+              elif let == "*":
+                  tokens.pop(index1)
+                  tokens.pop(index2)
+                  tokens.insert(index2, str(num1*num2))
+              elif let == "/":
+                  tokens.pop(index1)
+                  tokens.pop(index2)
+                  tokens.insert(index2, str(int(num2/num1)))
+          else:
+              i += 1
+      for num in tokens:
+          if num.isnumeric() or (num[0] == "-" and len(num) > 1):
+              return(int(num))
