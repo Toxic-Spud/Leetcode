@@ -1,0 +1,15 @@
+def maxProfit(self, prices: List[int]) -> int:
+      highest = 0
+      lowest = float(inf)
+      prof = 0
+      for num in prices:
+          if num < lowest:
+              if prof < highest-lowest:
+                  prof = highest-lowest
+              lowest = num
+              highest = 0
+          if num > highest:
+              highest = num
+      if prof < highest-lowest:
+          prof = highest-lowest
+      return(prof)
