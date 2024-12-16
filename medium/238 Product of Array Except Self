@@ -1,0 +1,16 @@
+def productExceptSelf(self, nums: List[int]) -> List[int]:
+      bef = [1]*len(nums)
+      aft = [1]*len(nums)
+      totb = 1
+      tota = 1
+      for i,num in enumerate(nums):
+          bef[i] = totb
+          totb = totb * num
+      for i,num in enumerate(nums[::-1]):
+          aft[i] = tota
+          tota = tota * num
+      aft.reverse()
+      res = []
+      for num1,num2 in zip(aft,bef):
+          res.append(num1*num2)
+      return(res)
