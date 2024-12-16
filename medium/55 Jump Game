@@ -1,0 +1,8 @@
+def canJump(self, nums: List[int]) -> bool:
+      stack = []
+      nums.reverse()
+      it = nums
+      for i,num in enumerate(it):
+          if i-num <= 0 or i-num <= stack[-1:][0]:
+              stack.append(i)
+      return(stack[-1:][0] == len(nums)-1)
