@@ -1,0 +1,8 @@
+def maxProfit(self, prices: List[int]) -> int:
+      tot = 0
+      for i in range(len(prices)-1):
+          num1 = prices[i]
+          num2 = prices[i+1]
+          if num2 > num1:
+              tot += num2 - num1
+      return(tot)
