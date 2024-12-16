@@ -1,0 +1,15 @@
+def removeDuplicates(self, nums: List[int]) -> int:
+      prev = None
+      dell = False
+      i = 0
+      while i < len(nums):
+          if nums[i] == prev:
+              if not dell:
+                  dell = not dell
+                  i += 1
+              else:
+                  nums.pop(i)
+          else:
+              dell = False
+              i += 1
+          prev = nums[i-1]
