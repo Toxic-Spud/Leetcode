@@ -1,0 +1,13 @@
+def reverseWords(self, s: str) -> str:
+      ret = ""
+      word = ""
+      for let in s:
+          if let == " " and word != "":
+              ret = word + " " + ret
+              word = ""
+          elif let != " ":
+              word += let
+      if word != "":
+          ret = word + " " + ret
+      return(ret.strip())
+
