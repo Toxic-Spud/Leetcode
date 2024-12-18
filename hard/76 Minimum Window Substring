@@ -1,0 +1,34 @@
+def minWindow(self, s: str, t: str) -> str:
+      if len(s) < len(t) or t =="":
+          return ""
+      tot = 0
+      thresh = len(t)
+      dic = {}
+      tDict = {}
+      for let in t:
+          tDict.setdefault(let, 0)
+          tDict[let] += 1
+      point1 = 0
+      point2 = 0
+      smallest = [0,0]
+      small = float(inf)
+      while (point2 < len(s) or (point2 < len(s)+1 and tot == thresh)) and small > thresh:
+          if tot != thresh:
+              let = s[point2]
+              point2 += 1
+              if let in tDict:
+                  dic.setdefault(let, 0)
+                  dic[let] += 1
+                  if dic[let] <= tDict[let]:
+                      tot += 1
+          else:
+              if point2 - point1 < small:
+                  smallest = [point1,point2]
+                  small = point2 - point1
+              let = s[point1]
+              point1 += 1
+              if let in tDict:
+                  if dic[let] <= tDict[let]:
+                      tot -= 1
+                  dic[let] -= 1
+      return(s[smallest[0]:smallest[1]])
