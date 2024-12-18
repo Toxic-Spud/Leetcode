@@ -1,0 +1,37 @@
+def findSubstring(self, s: str, words: List[str]) -> List[int]:
+    lw = len(words)
+    l = len(words[0])
+    wordsDict = {}
+    for word in words:
+        wordsDict.setdefault(word, 0)
+        wordsDict[word] += 1
+    words = wordsDict
+    ret = []
+    setRet = set()
+    point = 0
+    while point - 1 + (lw * l) < len(s):
+        window = s[point : point + l * lw]
+        res = True
+        if point - l not in setRet:
+            dic = {}
+            for i in range(lw):
+                pointi = i * l
+                word = window[pointi : pointi + l]
+                if word in words:
+                    dic.setdefault(word, 0)
+                    count = dic[word]
+                    dic[word] = count + 1
+                    if count + 1 > words[word]:
+                        res = False
+                        break
+                else:
+                    res = False
+                    break
+        else:
+            if window[-l:] != s[point - l : point]:
+                res = False
+        if res:
+            setRet.add(point)
+            ret.append(point)
+        point += 1
+    return ret
