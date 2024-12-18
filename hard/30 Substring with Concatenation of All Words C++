@@ -1,0 +1,65 @@
+#include <unordered_map>
+#include <set>
+#include <string>
+using namespace std;
+
+
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        int lw = words.size();
+        int l = words[0].length();
+        unordered_map<string,int> wordsDict;
+        for (auto& word : words){
+            if (wordsDict.find(word) != wordsDict.end()){
+                ++wordsDict[word];
+            }
+            else{wordsDict[word] = 1;}
+        }
+        vector<int> ret;
+        set<int> setRet;
+        int point = 0;
+        bool res;
+        string window;
+        unordered_map<string,int> dic;
+        int pointi;
+        string word;
+        for(int point = 0; point-1+(lw*l) < s.length(); ++point){
+            window = s.substr(point, l*lw);
+            res = true;
+            if (setRet.count(point-l) == 0){
+                dic.clear();
+                for (int i = 0; i < lw ; ++i){
+                    pointi = i*l;
+                    word = window.substr(pointi, l);
+                    if (wordsDict.find(word) != wordsDict.end()){
+                        if (dic.find(word) != dic.end()){
+                            ++dic[word];
+                        }
+                        else{dic[word] = 1;}
+
+                        if (dic[word] > wordsDict[word]){
+                            res = false;
+                            break;
+                        }
+                    }
+                    else{
+                        res = false;
+                        break;
+                    }
+                }
+            }
+            else{
+                if (window.substr(window.length()-l, l) != s.substr(point-l,l)){
+                    res = false;
+                }
+            }
+            if (res){
+                setRet.insert(point);
+                ret.insert(ret.end(), point);
+            }
+        }
+        return(ret);
+        
+    }
+};
