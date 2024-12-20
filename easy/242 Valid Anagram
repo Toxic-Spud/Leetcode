@@ -1,0 +1,15 @@
+def isAnagram(self, s: str, t: str) -> bool:
+  if len(s) != len(t):
+      return(False)
+  sDict = {}
+  for let in s:
+      sDict.setdefault(let, 0)
+      sDict[let] += 1
+  for let in t:
+      if let in sDict:
+          if sDict[let] == 0:
+              return(False)
+          sDict[let] -= 1
+      else:
+          return False
+  return True
