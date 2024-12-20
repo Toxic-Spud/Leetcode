@@ -1,0 +1,35 @@
+from random import choice
+class RandomizedSet:
+
+    def __init__(self):
+        self.dic = {}
+        self.lis = []
+    
+    def is_in(self, val: int) -> bool:
+        if val in self.dic:
+            return True
+        return False
+
+    def insert(self, val: int) -> bool:
+        if self.is_in(val):
+            return False
+        self.dic[val] = len(self.lis)
+        self.lis.append(val)
+        return True
+
+        
+
+    def remove(self, val: int) -> bool:
+        if not self.is_in(val):
+            return False
+        self.dic[self.lis[-1]] = self.dic[val]
+        self.lis[self.dic[val]] = self.lis[-1]
+        self.lis.pop()
+        self.dic.pop(val)
+        return True
+
+        
+
+    def getRandom(self) -> int:
+        return(choice(self.lis))
+        
