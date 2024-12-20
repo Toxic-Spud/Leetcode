@@ -1,0 +1,21 @@
+def threeSum(self, nums: List[int]) -> List[List[int]]:
+    nums.sort()
+    ret = []
+    seen = set()
+    print(nums)
+    for i in range(len(nums)-2):
+        p1 = i + 1
+        p2 = len(nums)-1
+        while p1 < p2:
+            total = nums[p1] + nums[p2] + nums[i]
+            if total > 0:
+                p2 -= 1
+            elif total < 0:
+                p1 += 1
+            else:
+                quick_hash = (nums[p1] ,nums[p2] , nums[i])
+                if quick_hash not in seen:
+                    ret.append([nums[i],nums[p1], nums[p2]])
+                    seen.add(quick_hash)
+                p1 += 1
+    return(ret)
