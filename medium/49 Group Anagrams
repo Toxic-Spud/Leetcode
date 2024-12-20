@@ -1,0 +1,17 @@
+def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+    ana = {}
+    res = []
+    for string in strs:
+        bad_hash = 0
+        s = 0
+        for let in string:
+            num = ord(let) - 97
+            s += num
+            bad_hash += 1 << num
+        bad_hash += (s-1 << 26) + (len(string) << 33)
+        if bad_hash in ana:
+            res[ana[bad_hash]].append(string)
+        else:
+            ana[bad_hash] = len(res)
+            res.append([string])
+    return(res)
