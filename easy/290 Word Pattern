@@ -1,0 +1,17 @@
+def wordPattern(self, pattern: str, s: str) -> bool:
+    seen = {}
+    has_key = set()
+    s = s.split(" ")
+    if len(s) !=  len(pattern):
+        return(False)
+    for key, val in zip(pattern,s):
+        print(f"{key}  :  {val}")
+        if key in seen:
+            if seen[key] != val:
+                return(False)
+        else:
+            if val in has_key:
+                return(False)
+            seen[key] = val
+            has_key.add(val)
+    return(True)
