@@ -1,0 +1,13 @@
+def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+    mag = {}
+    for let in magazine:
+        mag.setdefault(let, 0)
+        mag[let] += 1
+    for let in ransomNote:
+        if let in mag:
+            if mag[let] < 1:
+                return(False)
+            mag[let] -= 1
+        else:
+            return(False)
+    return(True)
