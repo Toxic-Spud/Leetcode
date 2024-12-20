@@ -1,0 +1,11 @@
+def isSubsequence(self, s: str, t: str) -> bool:
+      p1 = 0
+      p2 = 0
+      ls = len(s)
+      lt = len(t)
+      while p1 < ls and p2 < lt:
+          if s[p1] == t[p2]:
+              p1 += 1
+          p2 += 1
+      return(p1 == ls)
+      
