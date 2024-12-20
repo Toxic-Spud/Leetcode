@@ -1,0 +1,14 @@
+def hIndex(self, citations: List[int]) -> int:
+      citations.sort()
+      h = 0
+      point = 0
+      i = 0
+      while i <= len(citations)-point:
+          if citations[point] >= i:
+              i - point
+              h = i
+              i += 1
+          else: 
+              point += 1
+          
+      return(h)
