@@ -1,0 +1,20 @@
+def xorAllNums(self, nums1: List[int], nums2: List[int]) -> int:
+      if len(nums1) % 2 == 0 and len(nums2) % 2 == 0:
+          return(0)
+      elif len(nums1) % 2 == 0 and len(nums2) % 2 == 1:
+          res = 0
+          for num in nums1:
+              res = res ^ num
+          return(res)
+      elif len(nums1) % 2 == 1 and len(nums2) % 2 == 0:
+          res = 0
+          for num in nums2:
+              res = res ^ num
+          return(res)
+      else:
+          res = 0
+          for num in nums2:
+              res = res ^ num
+          for num in nums1:
+              res = res ^ num
+          return(res)
