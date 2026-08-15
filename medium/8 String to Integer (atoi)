@@ -1,0 +1,27 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        inp = s.strip()
+        if inp == "":
+            return 0
+        negative = inp[0] == "-"
+        skip = 0
+        greatest = (2**31)-1
+        smallest = -(2**31)
+        if  inp[0] in "+-":
+            skip = 1
+        res = 0
+        for char in inp[skip:]:
+            if char.isdigit():
+                res = (res * 10) + int(char)
+            else:
+                break
+
+            if res > greatest:
+                if negative:
+                    return smallest
+                return greatest
+            
+        if negative:
+            return 0-res 
+
+        return res
