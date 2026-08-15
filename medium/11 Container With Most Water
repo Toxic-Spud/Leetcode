@@ -1,0 +1,20 @@
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        i1 = 0
+        i2 = len(height) - 1
+        max_vol = 0
+        while i1 < i2:
+            num1 = height[i1]
+            num2 = height[i2]
+            width = i2-i1
+            if num1 > num2:
+                i2 = i2 -1
+                num = num2
+            else:
+                i1 = i1 + 1
+                num = num1
+            vol = width * num
+            if vol > max_vol:
+                max_vol = vol
+        return max_vol
+
