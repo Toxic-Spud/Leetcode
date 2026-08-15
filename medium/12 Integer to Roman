@@ -1,0 +1,16 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        count = 0
+        res = ""
+        while num != 0:
+            first_digit = num % 10
+            chars = [["I", "V"], ["X", "L"], ["C", "D"], ["M", ""]]
+            if first_digit == 9:
+                res = chars[count][0] + chars[count+1][0] + res
+            elif first_digit == 4:
+                res = chars[count][0] + chars[count][1] + res 
+            else:
+                res =  (chars[count][1] * (first_digit//5))  +  (chars[count][0]* (first_digit%5)) + res
+            num = num // 10
+            count = count + 1
+        return res
