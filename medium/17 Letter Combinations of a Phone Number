@@ -1,0 +1,22 @@
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        dic = {2:["a", "b", "c"], 3:["d", "e", "f"], 4:["g", "h", "i"], 5:["j", "k", "l"], 6:["m", "n", "o"], 7:["p", "q", "r", "s"], 8:["t", "u", "v"], 9:["w", "y", "x", "z"]}
+        if len(digits) == 1:
+            return dic[int(digits)]
+        lst = []
+        for dig in digits:
+            lst.append(dic[int(dig)])
+       
+        while len(lst) > 1:
+            lst[0] = self.comb2(lst[0], lst.pop(1))
+        
+
+
+        return lst[0]
+
+    def comb2(self, l1, l2):
+        res = []
+        for let in l1:
+            for let2 in l2:
+                res.append(let + let2)
+        return(res)
