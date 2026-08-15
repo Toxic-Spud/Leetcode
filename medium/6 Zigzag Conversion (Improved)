@@ -1,0 +1,30 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        diag_chars = numRows - 2
+        len_s = len(s)
+        res = ""
+        if numRows == 1:
+            return s
+        i = 0
+        
+        while i < len_s:
+            res = res + s[i]
+            i = i + diag_chars + numRows
+
+        for i in range(numRows)[1:-1]:
+            diag_char_pos = diag_chars - i
+            char = i
+            offset_to_diag = numRows - i
+            while char < len_s:
+                res = res + s[char] 
+                if (char + offset_to_diag + diag_char_pos) < len_s:
+                    res = res + s[char + offset_to_diag + diag_char_pos]
+                char = char + diag_chars + numRows
+        i = numRows - 1
+
+        while i < len_s:
+            res = res + s[i]
+            i = i + diag_chars + numRows
+
+        return res
+        
