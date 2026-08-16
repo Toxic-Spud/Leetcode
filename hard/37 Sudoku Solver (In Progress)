@@ -1,0 +1,42 @@
+class Solution:
+    nums = set([1,2,3,4,5,6,7,8,9])
+    def missing_from_row (self, row_num):
+        present_nums = set()
+        for num in self.board[row_num]:
+            if num != ".":
+                present_nums.add(int(num))
+        return (self.nums - present_nums)
+
+
+    def missing_from_box (self, col_num, row_num):
+        box_col = col_num // 3 
+        box_row = row_num // 3
+        box_nums = []
+        for i in range((3*box_row), (3*box_row)+3):
+            box_nums = box_nums + self.board[i][box_col*3:(box_col*3)+3]
+        res = set()
+        for item in box_nums:
+            if item != ".":
+                res.add(int(item))
+        return (self.nums - res)
+
+    def missing_from_column (self, col_num):
+        present_nums = set()
+        for row in self.board:
+            if row[col_num] != ".":
+                present_nums.add(int(row[col_num]))
+        return (self.nums - present_nums)
+            
+    def solveSudoku(self, board: list[list[str]]) -> None:
+        self.board = board
+        solved = False
+        while not solved:
+            solved = True
+            for a, row in enumerate(board):
+                for b, column in enumerate(row):
+                    if board[a][b] != ".":
+                        continue
+                    valid_nums = self.missing_from_column(b).intersection(self.missing_from_row(a).intersection(self.missing_from_box(b,a)))
+                    if len(valid_nums) == 1:
+                        solved = False
+                        board[a][b] = str(list(valid_nums)[0])
