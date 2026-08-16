@@ -1,0 +1,34 @@
+class Solution:
+    def is_int(self, s):
+        if "+" in s or "-" in s:
+            s = s[1:]
+        if not s.isdigit():
+            return False
+        return True
+
+    def is_decimal_or_int(self, s):
+        s = s.split(".")
+        if len(s) == 1:
+            return s[0].isdigit()
+        if len(s) == 2:
+            if s[0] == "":
+                return s[1].isdigit()
+            if s[1] == "":
+                return s[0].isdigit()
+            else:
+                return s[1].isdigit() and s[0].isdigit()
+        return False
+
+    def isNumber(self, s: str) -> bool:
+        if s[0] == "-" or s[0] == "+":
+            s = s[1:]
+        s = s.lower()
+        s = s.split("e")
+        if len(s) > 1:
+            exponent = ""
+            for item in s[1:]:
+                exponent = exponent + item + "e"
+            exponent = exponent [:-1]
+            return self.is_decimal_or_int(s[0]) and self.is_int(exponent)
+        return self.is_decimal_or_int(s[0])
+
