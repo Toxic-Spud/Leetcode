@@ -1,0 +1,44 @@
+class Solution:
+    def centre_justify (self, words, maxWidth):
+        length = 0
+        if len(words) == 1:
+            return words[0] + (" " * (maxWidth - len(words[0])))
+        for word in words:
+            length = length + len(word)
+        spaces = maxWidth - length
+        spaces_per_word = spaces//(len(words) - 1)
+        leftover = spaces % (len(words) - 1)
+        line = ""
+        for i, word in enumerate(words):
+            line = line + word + (" " * (spaces_per_word + max(0, min(1, (leftover - i)))))
+        line = line[:-spaces_per_word]
+        return line
+
+    def just_left(self, words, maxWidth):
+        if len(words) == 1:
+            return words[0] + (" " * (maxWidth - len(words[0])))
+        line = ""
+        for word in words:
+            line = line + word + " "
+        line = line[:-1]
+        line = line + (" " * (maxWidth - len(line)))
+        return line
+            
+        
+
+    def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
+        lines = []
+        running_total = 0
+        line = []
+        for word in words:
+            running_total = running_total + len(word) + 1
+            if (running_total) > (maxWidth+1):
+                lines.append(self.centre_justify(line, maxWidth))
+                line = []
+                running_total = len(word) + 1
+            line.append(word)
+
+        lines.append(self.just_left(line, maxWidth))
+        return lines
+
+        
