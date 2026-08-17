@@ -1,0 +1,49 @@
+class Solution:
+    def next_larger (self, arr):
+        arr = arr[-1::-1]
+        larger_stack = []
+        larger_pos = []
+        next_larger_pos = []
+        length = len(arr)
+        for i, num in enumerate(arr):
+            pos = length - 1 - i
+            if larger_stack == []:
+                larger_stack.append(num)
+                larger_pos.append(pos)
+                next_larger_pos.append(length)
+            elif num <= larger_stack[-1]:
+                next_larger_pos.append(larger_pos[-1])
+                larger_stack.append(num)
+                larger_pos.append(pos)
+            else:
+                while num > larger_stack[-1]:
+                    if len(larger_stack) == 1:
+                        next_larger_pos.append(larger_pos.pop())
+                        larger_stack.pop()
+                        larger_stack.append(num)
+                        larger_pos.append(pos)
+                        break
+                    larger_stack.pop()
+                    larger_pos.pop()   
+                else:
+                    next_larger_pos.append(larger_pos[-1])
+                    larger_stack.append(num)
+                    larger_pos.append(pos)
+        return next_larger_pos
+
+        
+    def trap(self, height: List[int]) -> int:
+        next_highest = self.next_larger(height)[-1::-1]
+        print(next_highest)
+        p1 = 0
+        total = 0
+        while p1 < len(height):
+            pool_end = next_highest[p1]
+            if pool_end != len(height):
+                side_height = min(height[p1], height[pool_end])
+                for i in range(p1+1, pool_end):
+                    total = total + (side_height - height[i])
+                p1 = pool_end
+            else:
+                return(total)
+        
