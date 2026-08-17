@@ -1,0 +1,72 @@
+class Solution:
+    def prev_smallest(self, arr):
+        smaller_stack = []
+        smaller_pos = []
+        prev_arr = [0 for i in range(len(arr))]
+        for i, num in enumerate(arr):
+            if smaller_stack == []:
+                prev_arr[i] = -1
+                smaller_stack.append(num)
+                smaller_pos.append(i)
+            
+            elif num > smaller_stack[-1]:
+                prev_arr[i] = smaller_pos[-1]
+                smaller_stack.append(num)
+                smaller_pos.append(i)
+            else:
+                while smaller_stack[-1] >= num:
+                    smaller_stack.pop()
+                    smaller_pos.pop()
+                    if smaller_stack == []:
+                        prev_arr[i] = -1
+                        smaller_stack.append(num)
+                        smaller_pos.append(i)
+                        break
+                else:
+                    prev_arr[i] = smaller_pos[-1]
+                    smaller_stack.append(num)
+                    smaller_pos.append(i)
+        return prev_arr
+
+    def next_smallest(self, arr):
+        smaller_stack = []
+        smaller_pos = []
+        prev_arr = [0 for i in range(len(arr))] 
+        arr = arr[-1::-1]
+        length = len(arr)
+        for i, num in enumerate(arr):
+            b = length - 1 - i
+            if smaller_stack == []:
+                prev_arr[b] = length
+                smaller_stack.append(num)
+                smaller_pos.append(b)
+
+            elif num > smaller_stack[-1]:
+                prev_arr[b] = smaller_pos[-1]
+                smaller_stack.append(num)
+                smaller_pos.append(b)
+            else:
+                while smaller_stack[-1] >= num:
+                    smaller_stack.pop()
+                    smaller_pos.pop()
+                    if smaller_stack == []:
+                        prev_arr[b] = length
+                        smaller_stack.append(num)
+                        smaller_pos.append(b)
+                        break
+                else:
+                    prev_arr[b] = smaller_pos[-1]
+                    smaller_stack.append(num)
+                    smaller_pos.append(b)
+        return prev_arr
+    
+
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        max_area = 0
+        prev_smaller = self.prev_smallest(heights)
+        next_smaller = self.next_smallest(heights)
+        for i, num in enumerate(heights):
+            area = (next_smaller[i] - prev_smaller[i] - 1) * num
+            if area > max_area:
+                max_area = area
+        return max_area
