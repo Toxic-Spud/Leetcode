@@ -1,0 +1,16 @@
+class Solution:
+    def isBST(self, tree, minimum, maximum):
+        if tree == None:
+            return True
+        if tree.val < maximum and tree.val > minimum:
+            left = self.isBST(tree.left, minimum, tree.val)
+            if left:
+                right = self.isBST(tree.right, tree.val, maximum)
+                if right:
+                    return True
+        return False
+
+        
+    def isValidBST(self, root: TreeNode | None) -> bool:
+        return self.isBST(root, float("-inf"), float("inf"))
+# I thank OCAML for opening my eyes to the wonder of reccursion
