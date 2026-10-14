@@ -1,0 +1,24 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0: return 1.0
+        if x == 0: return 0
+        negative = n < 0
+        n = abs(n)
+        powCount = 1
+        prev = []
+        current = x
+        while powCount != n:
+            prev.append(current)
+            if n//powCount >= 2:
+                powCount = powCount * 2
+                current = current * current
+            else:
+                powerToAdd = (n - powCount).bit_length() - 1
+                powCount += 1 << powerToAdd
+                current = current * prev[powerToAdd]
+        if negative: current = 1.0 / current
+        return current
+
+#Time O(log2(n))
+#Space O(log2(n))
+#With improvements space can be constant
