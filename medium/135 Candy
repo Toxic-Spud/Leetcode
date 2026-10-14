@@ -1,0 +1,16 @@
+class Solution:
+    def candy(self, ratings: list[int]) -> int:
+        candies = [1] * len(ratings)
+        for i, rating in enumerate(ratings):
+            if i == 0: continue
+            if rating > ratings[i-1]:
+                candies[i] = candies[i-1] + 1
+        tot = candies[len(ratings)-1]
+        for i in range(len(ratings)-2, -1, -1):
+            rating = ratings[i]
+            if rating > ratings[i+1]:
+                candy = candies[i+1] + 1
+                if candy > candies[i]:
+                    candies[i] = candy
+            tot += candies[i]
+        return tot
