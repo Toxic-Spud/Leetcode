@@ -1,0 +1,25 @@
+class Solution:
+    def rotateRight(self, head: ListNode | None, k: int) -> ListNode | None:
+        if k == 0: return head
+        count = 0
+        current = head
+        while current != None:
+            count += 1
+            current = current.next
+        if count == 0: return head
+        tailPos = k % count
+        pointer1 = head
+        pointer2 = head
+        for i in range(tailPos):
+            pointer2 = pointer2.next
+        while pointer2.next != None:
+            pointer2 = pointer2.next
+            pointer1 = pointer1.next
+        pointer2.next = head
+        head = pointer1.next
+        pointer1.next = None
+        return head
+
+
+# Time O(2n)
+# Space O(1)
