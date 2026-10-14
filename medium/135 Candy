@@ -14,3 +14,6 @@ class Solution:
                     candies[i] = candy
             tot += candies[i]
         return tot
+# Time O(2n)
+# Space O(n)
+# working on reducing time to n and space to constant
