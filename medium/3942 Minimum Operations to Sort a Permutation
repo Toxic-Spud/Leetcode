@@ -1,0 +1,40 @@
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        length = len(nums)
+        if length <= 1 or (length == 2 and nums[0] == 0):
+            return 0
+        elif length == 2:
+            return 1
+        counter = 0
+        if nums[0] == 0:
+            direction = nums[2] - nums[1]
+        elif nums[1] == 0:
+            if nums[0] == 1:
+                direction = -1
+            elif nums[2] == 1:
+                direction = 1
+            else:
+                return -1
+        else:
+            direction = nums[1] - nums[0] 
+        if abs(direction) != 1:
+            return - 1
+        nextNum = nums[0]
+        while counter != length:
+            num = nums[counter]
+            if 0 == num:
+                counter += 1
+                nextNum = direction % length
+                continue
+            if num != nextNum:
+                return -1
+            nextNum += direction
+            counter += 1
+        if direction == -1:
+            operations = min(length-nums[0], nums[0]+2)
+        else:
+            operations = min(length-nums[length-1]-1, nums[length-1]+3)
+        return operations
+            
+
+# I know this is ugly but its O(N) time and and O(1) space 
