@@ -1,0 +1,43 @@
+from bisect import insort
+
+class Solution:
+    def maxAlternatingSum(self, nums: List[int]) -> int:
+        length = len(nums)
+        negatives = length // 2
+        for i in range(len(nums)): nums[i] = abs(nums[i])
+        nums.sort()
+        tot = 0
+        i = 0
+        while i < negatives:
+            tot -= nums[i] ** 2
+            tot += nums[length-1-i] ** 2
+            i += 1
+        if length % 2 != 0:
+            tot += nums[negatives] ** 2
+        return tot
+        
+        
+        
+        
+        """if len(nums) == 1:
+            return nums[0] ** 2
+        negatives = len(nums) // 2
+        negative_list = []
+        tot = 0
+        largest_negative = float("inf")
+        for num in nums:
+            if abs(num) < largest_negative or len(negative_list) < negatives:
+                insort(negative_list, abs(num))
+                tot -= abs(num) ** 2
+                if len(negative_list) > negatives:
+                    tot += (negative_list.pop() ** 2) * 2
+                largest_negative = negative_list[-1]
+            else:
+                tot += abs(num) ** 2
+
+
+        return tot"""
+
+
+#Weirdly seems to use 300-400 KB less memory if i import bisect
+# First attempt ( the bottom one) is meant to be O(n log n) but is far slower (3-4X) than the top one whitch tbf is also n log n
