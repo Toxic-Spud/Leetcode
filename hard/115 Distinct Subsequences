@@ -1,0 +1,23 @@
+class Solution:
+    def numDistinct(self, s: str, t: str) -> int:
+        if len(s) == len(t):
+            return 1 * (s == t)
+        current = [0] * len(t)
+        old = [0] * len(t)
+        dic = {}
+        for i, letter in enumerate(t):
+            old_val = dic.setdefault(letter, [])
+            old_val.append(i)
+            dic[letter] = old_val
+        
+        for letter in s:
+            if letter not in dic: continue
+            for val in dic[letter]:
+                if val != 0:
+                    current[val] += old[val-1]
+                else:
+                    current[val] += 1
+            old = current.copy()
+        return old[-1]
+
+# worst case its o(n^2) but typically it probably O(n), either way it beet 85% of other submissions in time and almost all in memory with roughly O(4n) space complexity
